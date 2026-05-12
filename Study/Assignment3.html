@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        margin: 20px 200px 20px 200px;
+        overflow: hidden;
+      }
+      nav {
+        background-color: #0f100f;
+        color: azure;
+        width: 1140px;
+        height: 40px;
+        display: flex;
+        text-align: center;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        margin-top: 20px;
+        padding: 20px;
+      }
+
+      .f-control {
+        flex-direction: 10px;
+        display: flex;
+        justify-content: space-around;
+      }
+      h3 {
+        width: 350px;
+        height: 60px;
+        border-radius: 10px;
+        border: 1px solid #0f100f;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgb(180, 219, 244);
+      }
+      .n-logo {
+        display: flex;
+        gap: 30px;
+      }
+      .form1 {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 52%;
+        height: 52%;
+        border: 1px solid #0f100f;
+        border-radius: 10px;
+        margin-top: 30px;
+        padding: 20px;
+        background-color: #e9f2ef;
+        margin-left: 20px;
+      }
+      .inner-form {
+        width: 300px;
+        height: 100px;
+        border: 1px solid rgb(242, 244, 243);
+        background-color: rgb(93, 157, 247);
+        justify-content: center;
+        align-items: center;
+        padding: 30px;
+      }
+      .form2 {
+        border: 1px solid #0f100f;
+        border-radius: 10px;
+        width: 50%;
+        margin-top: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(228, 228, 221, 0.888);
+      }
+      .container {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+      }
+      button {
+        background-color: rgba(58, 89, 114, 0.43);
+        margin-top: 10px;
+        margin-left: 30px;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>CSS Utility Simulator</h1>
+    <p>
+      Change the inputs below to see how atomic classes combine to build UIs.
+    </p>
+    <nav>
+      <h2>MyLogo</h2>
+      <div class="n-logo">
+        <span>Home</span>
+        <span> About </span>
+        <span>Contact</span>
+      </div>
+    </nav>
+
+    <div class="f-control">
+      <h3>Feature1</h3>
+      <h3>Feature2</h3>
+      <h3>Feature3</h3>
+    </div>
+
+    <div class="container">
+      <section class="form1">
+        <h5>Utility Control</h5>
+        <label>Padding (Spacing)</label>
+        <select>
+          <option>Medium(p-8)</option>
+        </select>
+
+        <label>Background Theme (Colors)</label>
+        <select>
+          <option>Primary Blue</option>
+        </select>
+
+        <label>Text Size (Typography)</label>
+        <select>
+          <option>Large (text-xl)</option>
+        </select>
+
+        <label>Corner Radius(Borders)</label>
+        <select>
+          <option>Square (rounded-none)</option>
+        </select>
+
+        <label>Shadow (Depth)</label>
+        <select>
+          <option>Medium (shadow-md)</option>
+        </select>
+      </section>
+
+      <section class="form2">
+        <div class="inner-form">
+          <h4>Alex Walker</h4>
+          <p>
+            Full Stack Web Developer building awesome things with Tailwind CSS.
+          </p>
+        </div>
+      </section>
+    </div>
+    <button>Submit</button>
+    <button>Hover Me Slowly!</button>
+  </body>
+</html>
