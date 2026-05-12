@@ -9,59 +9,46 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: sans-serif;
       }
       body {
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #f0f0f0;
-        padding: 50px 0;
+        height: 100vh;
+        background-color: #f4f4f4;
       }
       .container {
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         border: 1px solid white;
         background: rgb(221, 174, 174);
-        width: 260px;
-        padding: 20px 10px;
-        border-radius: 20px;
+        width: 250px;
+        padding: 15px;
+        border-radius: 10px;
       }
       #screen {
         text-align: right;
-        padding: 15px;
+        padding: 10px;
         border: none;
         border-radius: 10px;
         width: 100%;
-        font-size: 24px;
+        font-size: 20px;
         background-color: rgba(255, 255, 255, 0.3);
         margin-bottom: 15px;
         outline: none;
-        color: #333;
       }
       .buttons {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: 8px;
+        justify-content: center;
       }
       button {
         border-radius: 50%;
-        height: 45px;
-        width: 45px;
-        margin: auto;
+        height: 40px;
+        width: 40px;
+        margin: 6px 9px;
         border: none;
         cursor: pointer;
-        font-size: 18px;
         font-weight: bold;
-        background: #fff;
-        transition: 0.2s;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      button:active {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        justify-content: center;
       }
       .clear {
         color: brown;
@@ -83,6 +70,7 @@
         placeholder="0"
         oninput="syncOutput(this.value)"
       />
+      <!-- onclick="syncOutput(this.value)" -->
 
       <div class="buttons">
         <button class="clear" onclick="clearScreen()">C</button>
@@ -115,10 +103,10 @@
 
     <script>
       let output = "";
-      const screenElement = document.getElementById("screen");
+      const screen = document.getElementById("screen");
 
       function updateScreen() {
-        screenElement.value = output;
+        screen.value = output;
       }
 
       function syncOutput(val) {
@@ -127,21 +115,26 @@
 
       function appendValue(value) {
         const operators = ["+", "-", "*", "/", ".", "%"];
-        if (operators.includes(value) && operators.includes(output.slice(-1)))
+
+        // Prevent double operators consecutively
+        if (operators.includes(value) && operators.includes(output.slice(-1))) {
           return;
+        }
 
-        let startPos = screenElement.selectionStart;
-        let endPos = screenElement.selectionEnd;
+        // Handle insertion at cursor position
+        let startPos = screen.selectionStart;
+        let endPos = screen.selectionEnd;
 
-        if (startPos !== null) {
+        if (startPos || startPos == "0") {
           output =
             output.substring(0, startPos) +
             value +
             output.substring(endPos, output.length);
           updateScreen();
+          // Maintain cursor position
           setTimeout(() => {
-            screenElement.setSelectionRange(startPos + 1, startPos + 1);
-            screenElement.focus();
+            screen.setSelectionRange(startPos + 1, startPos + 1);
+            screen.focus();
           }, 0);
         } else {
           output += value;
@@ -155,15 +148,18 @@
       }
 
       function deleteLast() {
-        let startPos = screenElement.selectionStart;
+        let startPos = screen.selectionStart;
+
+        let endPos = screen.selectionEnd;
+
         if (startPos > 0) {
           output =
             output.substring(0, startPos - 1) +
-            output.substring(screenElement.selectionEnd, output.length);
+            output.substring(endPos, output.length);
           updateScreen();
           setTimeout(() => {
-            screenElement.setSelectionRange(startPos - 1, startPos - 1);
-            screenElement.focus();
+            screen.setSelectionRange(startPos - 1, startPos - 1);
+            screen.focus();
           }, 0);
         } else {
           output = output.slice(0, -1);
@@ -173,22 +169,22 @@
 
       function calculate() {
         try {
-          let formattedInput = output
-            .replace(/(\d)(\()/g, "$1*$2")
-            .replace(/(\))(\d)/g, "$1*$2");
-
-          if (/\/0(?![.0-9])/.test(formattedInput)) {
+          // Check specifically for division by zero (Mathematical zero)
+          // This regex looks for '/' followed by '0' that isn't followed by a decimal point or other digits
+          // and ensures it's not part of a larger number like 10.
+          if (/\/0(?![.0-9])/.test(output)) {
             output = "Cannot divide by 0";
             updateScreen();
             output = "";
             return;
           }
 
-          let result = eval(formattedInput);
+          let result = eval(output);
 
           if (!isFinite(result)) {
             output = "Error";
           } else {
+            // Limit to 6 decimal places if result is not an integer
             if (Number.isInteger(result)) {
               output = result.toString();
             } else {
