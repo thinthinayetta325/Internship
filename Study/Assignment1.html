@@ -111,8 +111,8 @@
         const vipInput = document.getElementById("vipCheck").checked;
         const colorInput = document.getElementById("color").value;
 
-        document.getElementById("cardName").innerHTML = nameInput;
-        document.getElementById("cardAge").innerHTML = ageInput;
+        document.getElementById("cardName").textContent = nameInput;
+        document.getElementById("cardAge").textContent = ageInput;
         document.getElementById("idCard").style.backgroundColor = colorInput;
 
         if (vipInput) {

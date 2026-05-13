@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live DOM Card</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div
+      class="flex border-2 bg-white-500 p-6 rounded-lg gap-10 shadow-lg mx-auto mt-10 w-1/2 h-40%"
+    >
+      <section class="rounded-lg flex flex-col gap-2 w-1/2">
+        <h2 class="font-bold text-xl">Update Variables</h2>
+        <label class="text-md">Name (String):</label>
+        <input
+          class="border-2 border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          type="text"
+          id="name"
+          value="Alex Walker"
+          oninput="updateCard()"
+        />
+
+        <label>Age (Number):</label>
+        <input
+          class="border-2 border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          type="number"
+          id="age"
+          value="23"
+          oninput="updateCard()"
+        />
+
+        <label>VIP Status (Boolean):</label>
+        <input
+          class="border rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          type="checkbox"
+          id="vipCheck"
+          checked
+          oninput="updateCard()"
+        />
+
+        <label>Card Color:</label>
+        <input
+          class="border-2 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          type="color"
+          id="color"
+          value="#ffffff"
+          oninput="updateCard()"
+        />
+      </section>
+
+      <section class="flex flex-col gap-4 w-1/2">
+        <h2 class="font-bold text-xl">Live DOM Output</h2>
+
+        <div id="idCard" class="border bg-white-500 rounded-lg shadow-md p-5">
+          <div class="card-header">
+            <span
+              id="vipBadge"
+              class="flex flex-inline-block bg-yellow-500 text-white px-2 py-3 rounded-lg mb-2 text-sm w-1/2"
+              >VIP MEMBER</span
+            >
+          </div>
+
+          <div class="card-body">
+            <p class="font-bold" id="cardName">Alex Walker</p>
+            <p class="font-bold">Age: <span id="cardAge">23</span></p>
+          </div>
+        </div>
+      </section>
+
+      <script>
+        function updateCard() {
+          const nameInput = document.getElementById("name").value;
+          const ageInput = document.getElementById("age").value;
+          const vipInput = document.getElementById("vipCheck").checked;
+          const colorInput = document.getElementById("color").value;
+
+          document.getElementById("cardName").innerHTML = nameInput;
+          document.getElementById("cardAge").innerHTML = ageInput;
+          document.getElementById("idCard").style.backgroundColor = colorInput;
+
+          if (vipInput) {
+            document.getElementById("vipBadge").style.display = "inline-block";
+          } else {
+            document.getElementById("vipBadge").style.display = "none";
+          }
+        }
+      </script>
+    </div>
+  </body>
+</html>
