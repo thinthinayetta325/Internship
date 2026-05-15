@@ -1,78 +1,67 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tailwind Assignment - Responsive Menu</title>
+    <title>Tailwind Assignment - Grid Responsive Menu</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Smooth transition for navbar style changes on scroll */
+      #nav-container {
+        transition: all 0.3s ease-in-out;
+      }
+    </style>
   </head>
-  <body>
-    <!-- Main Wrapper -->
-    <div class="mx-4 md:mx-20 my-10 md:my-20">
-      <h1 class="text-3xl font-bold">Tailwind Utility Simulator</h1>
-      <p class="mb-4">
-        Change the inputs below to see how atomic classes combine to build UIs.
-      </p>
+  <body class="bg-gray-100">
+    
+    <!-- SECTION 1: Navigation Bar -->
+    <nav
+      id="nav-container"
+      class="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 md:px-20 h-16 bg-black text-white"
+    >
+      <h2 class="hover:text-blue-600 text-xl font-bold flex items-center gap-2 cursor-pointer">
+        MyLogo
+      </h2>
 
-      <!-- Navigation Bar -->
-      <nav
-        class="relative bg-black text-white w-full h-16 flex items-center justify-between px-4 mt-3 rounded-md z-50"
+      <div class="hidden md:flex justify-center gap-6">
+        <span class="hover:text-blue-400 cursor-pointer">Home</span>
+        <span class="hover:text-blue-400 cursor-pointer">About</span>
+        <span class="hover:text-blue-400 cursor-pointer">Contact</span>
+      </div>
+
+      <div class="md:hidden">
+        <button id="menuBtn" class="text-2xl focus:outline-none">☰</button>
+      </div>
+
+      <div
+        id="mobileMenu"
+        class="hidden absolute top-16 left-0 w-full bg-gray-900 flex-col items-center gap-4 py-6 rounded-b-md md:hidden shadow-lg border-t border-gray-700"
       >
-        <!-- Logo Section -->
-        <h2
-          class="hover:text-blue-600 text-xl font-bold flex items-center gap-2 cursor-pointer"
-        >
-          MyLogo
-        </h2>
+        <span class="hover:text-blue-400 cursor-pointer">Home</span>
+        <span class="hover:text-blue-400 cursor-pointer">About</span>
+        <span class="hover:text-blue-400 cursor-pointer">Contact</span>
+      </div>
+    </nav>
 
-        <!-- Desktop Menu (Hidden on Mobile) -->
-        <div class="hidden md:flex justify-center gap-6">
-          <span class="hover:text-blue-400 cursor-pointer">Home</span>
-          <span class="hover:text-blue-400 cursor-pointer">About</span>
-          <span class="hover:text-blue-400 cursor-pointer">Contact</span>
-        </div>
-
-        <!-- Mobile Menu Icon (Visible only on Mobile) -->
-        <div class="md:hidden">
-          <button id="menuBtn" class="text-2xl focus:outline-none">☰</button>
-        </div>
-
-        <!-- Mobile Dropdown Menu (Hidden by default) -->
-        <div
-          id="mobileMenu"
-          class="hidden absolute top-16 left-0 w-full bg-gray-900 flex-col items-center gap-4 py-6 rounded-b-md md:hidden shadow-lg border-t border-gray-700"
-        >
-          <span class="hover:text-blue-400 cursor-pointer">Home</span>
-          <span class="hover:text-blue-400 cursor-pointer">About</span>
-          <span class="hover:text-blue-400 cursor-pointer">Contact</span>
-        </div>
-      </nav>
-
-      <!-- Features Section -->
-      <div class="flex flex-col md:flex-row justify-around gap-3 mt-6">
-        <h3
-          class="flex text-center justify-center bg-slate-500 rounded-md border-2 px-10 md:px-20 py-2 border-gray-400"
-        >
+    <!-- SECTION 2: Main Content Wrapper -->
+    <div class="mx-4 md:mx-20 pt-24">
+      <!-- UPDATED: Features Section using GRID instead of FLEX -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-1">
+        <h3 class="text-center bg-slate-500 rounded-md border-2 py-4 border-gray-400">
           Feature1
         </h3>
-        <h3
-          class="flex text-center justify-center bg-slate-500 rounded-md border-2 px-10 md:px-20 py-2 border-gray-400"
-        >
+        <h3 class="text-center bg-slate-500 rounded-md border-2 py-4 border-gray-400">
           Feature2
         </h3>
-        <h3
-          class="flex text-center justify-center bg-slate-500 rounded-md border-2 px-10 md:px-20 py-2 border-gray-400"
-        >
+        <h3 class="text-center bg-slate-500 rounded-md border-2 py-4 border-gray-400">
           Feature3
         </h3>
       </div>
 
       <!-- Main Controls & Profile Area -->
       <div class="flex flex-col lg:flex-row gap-4 mt-6">
-        <!-- Left: Utility Control -->
-        <section
-          class="flex flex-col gap-4 w-full lg:w-1/2 border-2 rounded-md p-4 bg-slate-400"
-        >
+        <!-- Left: Utility Control Panel -->
+        <section class="flex flex-col gap-4 w-full lg:w-1/2 border-2 rounded-md p-4 bg-slate-400">
           <h5 class="font-bold">Utility Control</h5>
           <label>Padding (Spacing)</label>
           <select class="p-2 rounded-lg">
@@ -95,35 +84,21 @@
             <option>Medium (shadow-md)</option>
           </select>
         </section>
-        <!-- Right: Profile & Code View -->
+
+        <!-- Right: Profile Preview & Code View -->
         <div class="w-full lg:w-1/2 flex flex-col gap-6">
-          <section
-            class="bg-slate-400 flex justify-center items-center w-full h-[250px] rounded-md border-2 p-4"
-          >
-            <div
-              class="bg-sky-400 w-3/4 md:w-1/2 text-white p-4 rounded-md shadow-md"
-            >
+          <section class="bg-slate-400 flex justify-center items-center w-full h-[250px] rounded-md border-2 p-4">
+            <div class="bg-sky-400 w-3/4 md:w-1/2 text-white p-4 rounded-md shadow-md">
               <h4 class="font-bold">Alex Walker</h4>
-              <p>
-                Full Stack Web Developer building awesome things with Tailwind
-                CSS.
-              </p>
+              <p>Full Stack Web Developer building awesome things with Tailwind CSS.</p>
             </div>
           </section>
 
-          <section
-            class="relative w-full h-[250px] flex flex-col bg-slate-900 rounded-md shadow-md overflow-hidden border-2 border-gray-700"
-          >
-            <button
-              id="btnOutput"
-              class="absolute top-2 right-2 px-3 py-1 bg-gray-700 hover:bg-sky-500 text-gray-200 text-xs rounded border border-gray-500 transition-colors z-10"
-            >
+          <section class="relative w-full h-[250px] flex flex-col bg-slate-900 rounded-md shadow-md overflow-hidden border-2 border-gray-700 pt-5">
+            <button id="btnOutput" class="absolute top-2 right-2 px-3 py-1 bg-gray-700 hover:bg-sky-500 text-gray-200 text-xs rounded border border-gray-500 transition-colors z-10">
               HTML Output
             </button>
-            <div
-              id="outputContainer"
-              class="p-6 h-full font-mono text-sm overflow-auto"
-            >
+            <div id="outputContainer" class="p-6 h-full font-mono text-sm overflow-auto">
               <p id="outputText" class="text-green-400"></p>
             </div>
           </section>
@@ -131,46 +106,59 @@
       </div>
 
       <!-- Footer Buttons -->
-      <div class="flex flex-wrap gap-2 mt-6">
-        <button class="bg-blue-500 text-white rounded-md px-6 py-2">
+      <div class="flex flex-wrap gap-2 mt-6 pb-20">
+        <button class="bg-blue-500 text-white rounded-md px-6 py-2 hover:bg-blue-600">
           Submit
         </button>
-        <button
-          class="bg-white text-blue-400 border border-blue-400 rounded-md px-6 py-2"
-        >
+        <button class="bg-white text-blue-400 border border-blue-400 rounded-md px-6 py-2 hover:bg-gray-100">
           Read More
         </button>
-        <button class="bg-green-500 text-white rounded-md px-6 py-2">
+        <button class="bg-green-500 text-white rounded-md px-6 py-2 hover:bg-green-600">
           Hover Me Slowly!
         </button>
       </div>
+    </div>
 
-      <!-- Scripts -->
-      <script>
-        // Hamburger Menu Logic
-        const menuBtn = document.getElementById("menuBtn");
-        const mobileMenu = document.getElementById("mobileMenu");
+    <!-- JavaScript Logic -->
+    <script>
+      const menuBtn = document.getElementById("menuBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const navContainer = document.getElementById("nav-container");
 
-        menuBtn.addEventListener("click", () => {
-          mobileMenu.classList.toggle("hidden");
-        });
+      // Mobile Menu Toggle
+      menuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+        mobileMenu.classList.toggle("flex");
+      });
 
-        // HTML Code Output Logic
-        const btn = document.getElementById("btnOutput");
-        const outputText = document.getElementById("outputText");
-        const myHtmlCode = `<div class="p-4 bg-blue-600 text-white rounded-lg shadow-md">
+      // Navbar Scroll Change
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          navContainer.classList.replace("bg-black", "bg-slate-900");
+          navContainer.classList.add("shadow-xl", "h-14");
+          navContainer.classList.remove("h-16");
+        } else {
+          navContainer.classList.replace("bg-slate-900", "bg-black");
+          navContainer.classList.remove("shadow-xl", "h-14");
+          navContainer.classList.add("h-16");
+        }
+      });
+
+      // HTML Output Display
+      const btn = document.getElementById("btnOutput");
+      const outputText = document.getElementById("outputText");
+      const myHtmlCode = `<div class="p-4 bg-blue-600 text-white rounded-lg shadow-md">
     <h3 class="font-bold mb-2">Alex Walker</h3>
     <p class="opacity-80">Full-Stack Web Developer building awesome things with Tailwind CSS.</p>
 </div>`;
 
-        btn.addEventListener("click", () => {
-          if (outputText.innerText === "") {
-            outputText.textContent = myHtmlCode;
-          } else {
-            outputText.textContent = "";
-          }
-        });
-      </script>
-    </div>
+      btn.addEventListener("click", () => {
+        if (outputText.innerText === "") {
+          outputText.textContent = myHtmlCode;
+        } else {
+          outputText.textContent = "";
+        }
+      });
+    </script>
   </body>
 </html>
